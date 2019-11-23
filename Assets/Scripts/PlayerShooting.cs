@@ -16,6 +16,8 @@ public class PlayerShooting : MonoBehaviour
     // It mimics mouse cursor
     public GameObject cursor;
 
+    public Joystick joystick;
+
     public Transform shootPoint;
     public LayerMask layer;
 
@@ -26,6 +28,8 @@ public class PlayerShooting : MonoBehaviour
     public int lineSegment = 4;
 
     private Camera cam;
+
+    
 
 
     // Line rendering and launching missile 
@@ -66,9 +70,14 @@ public class PlayerShooting : MonoBehaviour
         {
 
             cursor.SetActive(true);
-            cursor.transform.position = hit.point + Vector3.up * 0.1f;
+            //cursor.transform.position = hit.point + Vector3.up * 0.1f;
 
-            Vector3 vo = CalculateVelocity(hit.point, shootPoint.position, 1f);
+
+
+            Vector3 vo = new Vector3(joystick.Horizontal * 30, 0, joystick.Vertical * 35);
+
+            //CalculateVelocity(hit.point, shootPoint.position, 1f);
+          //  Vector3 vd = new Vector3(joystick.Horizontal + 30, 0, joystick.Vertical + 30);
 
             // Make red line appear
             
@@ -78,7 +87,7 @@ public class PlayerShooting : MonoBehaviour
 
             vo.y = transform.position.x;
 
-            Debug.Log("Shoot point - z  == " + cursor.transform.position.z);
+            //Debug.Log("Shoot point - z  == " + cursor.transform.position.z);
 
 
             // Tower rotation to the shoot point
@@ -88,12 +97,19 @@ public class PlayerShooting : MonoBehaviour
             // It launches projectile acc. to the type
             if (Input.GetMouseButtonDown(0))
             {
-                    Rigidbody obj = Instantiate(projectile, shootPoint.position, Quaternion.identity);
-                    obj.velocity = vo;
-                
+                Rigidbody obj = Instantiate(projectile, shootPoint.position, Quaternion.identity);
+                obj.velocity = vo;
+
 
             }
         }
+    }
+
+    public void Shoot() {
+        Vector3 vo = new Vector3(joystick.Horizontal * 30, 0, joystick.Vertical * 30);
+
+        Rigidbody obj = Instantiate(projectile, shootPoint.position, Quaternion.identity);
+        obj.velocity = vo;
     }
 
     void RotateTower(float currentPosition, Vector3 vo)
