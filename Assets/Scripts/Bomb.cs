@@ -5,7 +5,7 @@ using UnityEngine;
 public class Bomb : MonoBehaviour
 {
     Transform transform;
-    public GameObject explosionEffect;
+   // public GameObject explosionEffect;
 
     float power = 10f;
     float radius = 5.0f;
@@ -13,14 +13,14 @@ public class Bomb : MonoBehaviour
 
     public void Hit()
     {
-        Invoke("Detonate", 5);
+        Invoke("Detonate", 1);
 
     }
 
     void Detonate()
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, radius);
-        Instantiate(explosionEffect, this.transform);
+        //Instantiate(explosionEffect, this.transform);
         foreach (Collider hit in colliders)
         {
             if (hit.gameObject.tag == "Enemy")
@@ -29,11 +29,12 @@ public class Bomb : MonoBehaviour
                 hit.attachedRigidbody.AddExplosionForce(power, transform.position, radius, upForce, ForceMode.Impulse);
             }
         }
+        Destroy(this);
     }
 
 
     public void Disappear()
     {
-        // III III
+
     }
 }
