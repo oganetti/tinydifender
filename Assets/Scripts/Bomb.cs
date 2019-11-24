@@ -34,7 +34,17 @@ public class Bomb : MonoBehaviour
             if (hit.gameObject.tag == "Enemy")
             {
                 Debug.Log("Enemy is bombed");
-                hit.attachedRigidbody.AddExplosionForce(power, transform.position, radius, upForce, ForceMode.Impulse);
+              //  hit.attachedRigidbody.AddExplosionForce(power, transform.position, radius, upForce, ForceMode.Impulse);
+
+                hit.gameObject.GetComponent<Enemy>().Die();
+
+                Rigidbody[] rigidbodies = hit.gameObject.GetComponentsInChildren<Rigidbody>();
+                for (int i=0; i < rigidbodies.Length; i++)
+                {
+                    rigidbodies[i].AddExplosionForce(power, transform.position, radius, upForce, ForceMode.Impulse);
+                }
+                
+
             }
         }
         Destroy(this.gameObject);
