@@ -15,6 +15,9 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject canvasInGame;
 
+    [SerializeField]
+    private GameObject canvasMarket;
+
     void Start()
     {
         Time.timeScale = 0;
@@ -48,5 +51,25 @@ public class GameManager : MonoBehaviour
         canvasMenu.SetActive(false);
         canvasGameOver.SetActive(false);
         canvasInGame.SetActive(true);
+    }
+
+    public void OpenShop()
+    {
+        Time.timeScale = 0;
+        canvasMenu.SetActive(false);
+        canvasGameOver.SetActive(false);
+        canvasInGame.SetActive(false);
+        canvasMarket.SetActive(true);
+
+    }
+
+    public void OpenMenu()
+    {
+        Time.timeScale = 0;
+        canvasMenu.SetActive(true);
+        canvasGameOver.SetActive(false);
+        canvasInGame.SetActive(false);
+        canvasMarket.SetActive(false);
+
     }
 }

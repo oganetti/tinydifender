@@ -75,6 +75,7 @@
     <Compile Include="Assets\Scripts\Enemies.cs" />
     <Compile Include="Assets\Scripts\Enemy.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
+    <Compile Include="Assets\Scripts\Market.cs" />
     <Compile Include="Assets\Scripts\MinionMovement.cs" />
     <Compile Include="Assets\Scripts\MovementBehaviour.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
