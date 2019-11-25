@@ -16,7 +16,7 @@ public class MinionMovement :  MovementBehaviour
     }
 
     public override void Move(Rigidbody rigidbody) {
-        Debug.Log("Minion is moving");
+        //Debug.Log("Minion is moving");
         rigidbody.AddForce(new Vector3(characterTransform.position.x, characterTransform.position.y,- characterTransform.position.z * speed * Time.deltaTime));
     }
 }

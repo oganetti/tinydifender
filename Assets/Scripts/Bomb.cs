@@ -6,6 +6,8 @@ public class Bomb : MonoBehaviour
 {
     private Transform transform;
     public GameObject explosionEffect;
+    public AudioSource audioS;
+    public AudioClip audioC;
 
     float power = 30f;
     float radius = 20.0f;
@@ -29,10 +31,14 @@ public class Bomb : MonoBehaviour
         Debug.Log("Detonate: Enter");
         Collider[] colliders = Physics.OverlapSphere(transform.position, radius);
         Instantiate(explosionEffect, new Vector3(this.transform.position.x,this.transform.position.y + 1 ,this.transform.position.z), explosionEffect.transform.rotation);
+       
+        
+        
         foreach (Collider hit in colliders)
         {
             if (hit.gameObject.tag == "Enemy")
             {
+                audioS.PlayOneShot(audioC);
                 Debug.Log("Enemy is bombed");
               //  hit.attachedRigidbody.AddExplosionForce(power, transform.position, radius, upForce, ForceMode.Impulse);
 
@@ -41,6 +47,7 @@ public class Bomb : MonoBehaviour
                 Rigidbody[] rigidbodies = hit.gameObject.GetComponentsInChildren<Rigidbody>();
                 for (int i=0; i < rigidbodies.Length; i++)
                 {
+                    audioS.PlayOneShot(audioC);
                     rigidbodies[i].AddExplosionForce(power, transform.position, radius, upForce, ForceMode.Impulse);
                 }
                 
