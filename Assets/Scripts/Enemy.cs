@@ -5,19 +5,24 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [SerializeField]
+    public GameManager gameManager;
+
+    [SerializeField]
     public MovementBehaviour movementBehaviour;
     [SerializeField]
     public GameObject deathCharacter;
 
     bool isAlive;
 
+
     public void Play()
-    { 
+    {
         movementBehaviour.Move(GetComponent<Rigidbody>());
     }
 
     public void Die() {
         isAlive = false;
+        gameManager.onEnemyDie();
         Instantiate(deathCharacter,transform.position,transform.rotation);
         Destroy(movementBehaviour.gameObject);
         Destroy(this.gameObject);

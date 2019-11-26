@@ -27,9 +27,13 @@ public class PlayerShooting : MonoBehaviour
     [Range(1,20)]
     public int lineSegment = 4;
 
+    // it constrains player to launch bomb more than in one sec.
+    float launchTimer;
+
     private Camera cam;
 
-    
+    public Animator characterAnimator;
+    public Animator bombAnimator;
 
 
     // Line rendering and launching missile 
@@ -45,12 +49,12 @@ public class PlayerShooting : MonoBehaviour
 
     */
 
-
     #endregion
 
     // Start is called before the first frame update
     void Start()
-    {
+    {      
+        launchTimer = 0;
         cam = Camera.main;
         lineVisual.positionCount = lineSegment;
     }
@@ -58,6 +62,7 @@ public class PlayerShooting : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        launchTimer -= Time.deltaTime;
         LaunchProjectile();
     }
 
@@ -99,10 +104,16 @@ public class PlayerShooting : MonoBehaviour
 
     public void Shoot() {
 
-        Vector3 vo = new Vector3(joystick.Horizontal * 30, 0, joystick.Vertical * 35);
+        Vector3 vo = new Vector3(joystick.Horizontal * 30, 0, Mathf.Clamp(joystick.Vertical * 35, 6f, 60f));
 
+        if (launchTimer <= 0) {
             Rigidbody obj = Instantiate(projectile, shootPoint.position, Quaternion.identity);
             obj.velocity = vo;
+            launchTimer = 1f;
+            characterAnimator.Play("ThrowBall");
+            bombAnimator.Play("BombChange");
+        }
+            
     }
 
     void RotateTower(float currentPosition, Vector3 vo)

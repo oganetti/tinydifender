@@ -9,8 +9,8 @@ public class Bomb : MonoBehaviour
     public AudioSource audioS;
     public AudioClip audioC;
 
-    float power = 30f;
-    float radius = 20.0f;
+    float power = 20f;
+    float radius = 10.0f;
     float upForce = 5.0f;
 
     private void Start()
@@ -32,9 +32,7 @@ public class Bomb : MonoBehaviour
         Collider[] colliders = Physics.OverlapSphere(transform.position, radius);
         Instantiate(explosionEffect, new Vector3(this.transform.position.x,this.transform.position.y + 1 ,this.transform.position.z), explosionEffect.transform.rotation);
        
-        
-        
-        foreach (Collider hit in colliders)
+       foreach (Collider hit in colliders)
         {
             if (hit.gameObject.tag == "Enemy")
             {

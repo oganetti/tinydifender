@@ -18,6 +18,16 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject canvasMarket;
 
+    [SerializeField]
+    public Transform defaultKingPosition;
+
+    [SerializeField]
+    public GameObject king;
+
+    bool isKingSpawned=false;
+
+    private int enemyCount = 4;
+
     void Start()
     {
         Time.timeScale = 0;
@@ -26,7 +36,11 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (enemyCount == 1 && !isKingSpawned) {
+            king.SetActive(true);
+            //Instantiate(king, defaultKingPosition.position,defaultKingPosition.rotation);
+            isKingSpawned = true;
+        }
     }
 
     public void StartGame()
@@ -72,4 +86,13 @@ public class GameManager : MonoBehaviour
         canvasMarket.SetActive(false);
 
     }
+
+    public int getEnemyCount() {
+        return enemyCount;
+    }
+
+    public void onEnemyDie() {
+        enemyCount--;
+    }
+    
 }
