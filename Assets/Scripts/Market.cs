@@ -22,7 +22,7 @@ public class Market : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        PlayerPrefs.SetInt("money", 4000);
+        
         PlayerPrefs.SetInt("green", 0);
         PlayerPrefs.SetInt("blue", 0);
         PlayerPrefs.SetInt("red", 0);
@@ -36,7 +36,7 @@ public class Market : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        buyColor(PlayerPrefs.GetString("currentColor"));
     }
 
 
@@ -76,9 +76,13 @@ public class Market : MonoBehaviour
                     renderer.sharedMaterial.color = Color.magenta;
                     buttonMagenta.text = "Sold!";
                 }
+                else if(color == "black")
+                {
+                    renderer.sharedMaterial.color = Color.black;
+                }
 
 
-
+                PlayerPrefs.SetString("currentColor", color);
                 PlayerPrefs.SetInt(color, 1);
             }
         }

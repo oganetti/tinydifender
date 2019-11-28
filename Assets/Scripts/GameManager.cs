@@ -19,18 +19,42 @@ public class GameManager : MonoBehaviour
     private GameObject canvasMarket;
 
     [SerializeField]
+    private GameObject canvasLevelComplete;
+
+    [SerializeField]
     public Transform defaultKingPosition;
 
     [SerializeField]
-    public GameObject king;
+    private GameObject king;
+
+    [SerializeField]
+    private Animator runAnimation;
 
     bool isKingSpawned=false;
+
+    //public List<AudioSource> audioSources;
+    [SerializeField]
+    private GameObject closeButton;
+
+    [SerializeField]
+    private GameObject openButton;
+
 
     private int enemyCount = 4;
 
     void Start()
     {
         Time.timeScale = 0;
+
+        if(SceneManager.GetActiveScene().buildIndex == 0)
+        {
+            PlayerPrefs.SetInt("money", 2000);
+            PlayerPrefs.SetInt("green", 0);
+            PlayerPrefs.SetInt("blue", 0);
+            PlayerPrefs.SetInt("red", 0);
+            PlayerPrefs.SetInt("magenta", 0);
+            PlayerPrefs.SetString("currentColor", "black");
+        }
     }
 
     // Update is called once per frame
@@ -41,7 +65,52 @@ public class GameManager : MonoBehaviour
             //Instantiate(king, defaultKingPosition.position,defaultKingPosition.rotation);
             isKingSpawned = true;
         }
+
+        if(enemyCount == 0)
+        {
+            LevelComplete();
+            enemyCount = 4;
+        }
+
     }
+
+    public void NextLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    public void closeSound()
+    {
+        /*foreach (AudioSource audioSorce in audioSources)
+        {
+            audioSorce.Stop();
+        }*/
+
+        AudioListener.pause = true;
+        openButton.SetActive(false);
+        closeButton.SetActive(true);
+
+    }
+
+    public void openSound()
+    {
+        AudioListener.pause = false;
+        closeButton.SetActive(false);
+        openButton.SetActive(true);
+    }
+
+    public void LevelComplete()
+    {
+        canvasMenu.SetActive(false);
+        canvasInGame.SetActive(false);
+        canvasGameOver.SetActive(false);
+        canvasLevelComplete.SetActive(true);
+        runAnimation.Play("Run");
+        PlayerPrefs.SetInt("money", PlayerPrefs.GetInt("money") + 2000);
+        Debug.Log(PlayerPrefs.GetInt("money"));
+
+    }
+
 
     public void StartGame()
     {
@@ -60,11 +129,10 @@ public class GameManager : MonoBehaviour
 
     public void Replay()
     {
-        Time.timeScale = 1;
+
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        canvasMenu.SetActive(false);
-        canvasGameOver.SetActive(false);
-        canvasInGame.SetActive(true);
+        Time.timeScale = 1;
+
     }
 
     public void OpenShop()

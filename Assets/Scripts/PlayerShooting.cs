@@ -35,6 +35,8 @@ public class PlayerShooting : MonoBehaviour
     public Animator characterAnimator;
     public Animator bombAnimator;
 
+    public Vector3 vo;
+
 
     // Line rendering and launching missile 
     // will work until player's cursor
@@ -57,6 +59,7 @@ public class PlayerShooting : MonoBehaviour
         launchTimer = 0;
         cam = Camera.main;
         lineVisual.positionCount = lineSegment;
+        vo = new Vector3(joystick.Horizontal * 10, 0, Mathf.Clamp(joystick.Vertical * 35, 6f, 60f));
     }
 
     // Update is called once per frame
@@ -77,15 +80,27 @@ public class PlayerShooting : MonoBehaviour
             cursor.SetActive(true);
             //cursor.transform.position = hit.point + Vector3.up * 0.1f;
 
-            Vector3 vo = new Vector3(joystick.Horizontal * 30, 0, Mathf.Clamp(joystick.Vertical * 35, 6f, 60f));
+            if(joystick.Horizontal != 0 && joystick.Vertical != 0)
+            {
+                vo = new Vector3(joystick.Horizontal * 10, 0, Mathf.Clamp(joystick.Vertical * 35, 6f, 60f));
+                Visualize(vo);
+            }
+            else
+            {
+                Visualize(vo);
+            }
+
+           
+
+            cursor.transform.position = CalculatePosInTime(vo, 1);
 
             //CalculateVelocity(hit.point, shootPoint.position, 1f);
             //  Vector3 vd = new Vector3(joystick.Horizontal + 30, 0, joystick.Vertical + 30);
 
             // Make red line appear
 
-            
-               Visualize(vo);
+
+            //Visualize(vo);
                 // trajectoryRenderer.DrawTrajectoryPoints(transform.position, vo);
             
 
@@ -104,14 +119,17 @@ public class PlayerShooting : MonoBehaviour
 
     public void Shoot() {
 
-        Vector3 vo = new Vector3(joystick.Horizontal * 30, 0, Mathf.Clamp(joystick.Vertical * 35, 6f, 60f));
+        //vo = new Vector3(joystick.Horizontal * 30, 0, Mathf.Clamp(joystick.Vertical * 35, 6f, 60f));
 
-        if (launchTimer <= 0) {
+        if (!characterAnimator.GetCurrentAnimatorStateInfo(0).IsName("Run2"))
+        {
+            if (launchTimer <= 0) {
             Rigidbody obj = Instantiate(projectile, shootPoint.position, Quaternion.identity);
-            obj.velocity = vo;
+            obj.velocity = new Vector3(vo.x,vo.y,vo.z+3);
             launchTimer = 1f;
-            characterAnimator.Play("ThrowBall");
-            bombAnimator.Play("BombChange");
+                characterAnimator.Play("ThrowBall");
+                bombAnimator.Play("BombChange");
+            }
         }
             
     }
@@ -120,6 +138,7 @@ public class PlayerShooting : MonoBehaviour
     {
 
             transform.rotation = Quaternion.LookRotation(vo);
+        //
         
     }
 
