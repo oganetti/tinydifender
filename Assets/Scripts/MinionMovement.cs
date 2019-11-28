@@ -6,7 +6,7 @@ public class MinionMovement :  MovementBehaviour
 {
     [SerializeField]
     public Transform characterTransform;
-    [Range(1,30)]
+    [Range(0.1f,30)]
     public float speed=15f;
 
     // Start is called before the first frame update

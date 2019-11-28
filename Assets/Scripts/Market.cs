@@ -21,12 +21,9 @@ public class Market : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    {
-        
-        PlayerPrefs.SetInt("green", 0);
-        PlayerPrefs.SetInt("blue", 0);
-        PlayerPrefs.SetInt("red", 0);
-        PlayerPrefs.SetInt("magenta", 0);
+    {      
+
+        moneyAmount = PlayerPrefs.GetInt("money");
 
         moneyAmount = PlayerPrefs.GetInt("money");
         money.text = moneyAmount.ToString();
@@ -36,12 +33,35 @@ public class Market : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        buyColor(PlayerPrefs.GetString("currentColor"));
+        //buyColor(PlayerPrefs.GetString("currentColor"));
+
+        moneyAmount = PlayerPrefs.GetInt("money");
+        money.text = moneyAmount.ToString();
+
+
+        if (PlayerPrefs.GetInt("magenta") == 1)
+        {
+            buttonMagenta.text = "Sold!";
+        }
+        if (PlayerPrefs.GetInt("red") == 1)
+        {
+            buttonRed.text = "Sold!";
+        }
+        if (PlayerPrefs.GetInt("blue") == 1)
+        {
+            buttonBlue.text = "Sold!";
+        }
+        if (PlayerPrefs.GetInt("green") == 1)
+        {
+            buttonGreen.text = "Sold!";
+        }
     }
 
 
     public void buyColor(string color)
     {
+
+        money.text = moneyAmount.ToString();
 
         if (PlayerPrefs.GetInt(color) == 0)
         {
@@ -49,7 +69,7 @@ public class Market : MonoBehaviour
             {
                 PlayerPrefs.SetInt("money", PlayerPrefs.GetInt("money") - 2000);
                 moneyAmount = PlayerPrefs.GetInt("money");
-                money.text = moneyAmount.ToString();
+                
 
                 if (color == "magenta")
                 {
@@ -89,6 +109,8 @@ public class Market : MonoBehaviour
 
         else if (PlayerPrefs.GetInt(color) == 1)
         {
+            Debug.Log("Hello theere");
+            Debug.Log(PlayerPrefs.GetInt(color) + "");
             if (color == "magenta")
             {
                 renderer.sharedMaterial.color = Color.magenta;

@@ -37,6 +37,8 @@ public class PlayerShooting : MonoBehaviour
 
     public Vector3 vo;
 
+    public bool foo = false;
+
 
     // Line rendering and launching missile 
     // will work until player's cursor
@@ -59,7 +61,7 @@ public class PlayerShooting : MonoBehaviour
         launchTimer = 0;
         cam = Camera.main;
         lineVisual.positionCount = lineSegment;
-        vo = new Vector3(joystick.Horizontal * 10, 0, Mathf.Clamp(joystick.Vertical * 35, 6f, 60f));
+        vo = new Vector3(joystick.Horizontal * 10, 0, Mathf.Clamp(joystick.Vertical * 35, 6f, 60f)+5);
     }
 
     // Update is called once per frame
@@ -82,15 +84,47 @@ public class PlayerShooting : MonoBehaviour
 
             if(joystick.Horizontal != 0 && joystick.Vertical != 0)
             {
-                vo = new Vector3(joystick.Horizontal * 10, 0, Mathf.Clamp(joystick.Vertical * 35, 6f, 60f));
+                Debug.Log(" horizontal x = " + joystick.Horizontal);
+                
+                // vo += new Vector3(joystick.Horizontal * 0.2f , 0, Mathf.Clamp(joystick.Vertical * 0.2f, 6f, 60f));
+                if ((vo.x >= -8 || joystick.Horizontal>0) && (vo.x < 7 || joystick.Horizontal < 0)) {
+                    vo += new Vector3(joystick.Horizontal * 20f*Time.deltaTime, 0, 0);
+
+                }
+
+                if ((vo.z >= 11 || joystick.Vertical > 0) && (vo.z < 40 || joystick.Vertical < 0))
+                {
+                    vo += new Vector3(0, 0, joystick.Vertical * 40f*Time.deltaTime);
+
+                }
+
+
+                foo = true;
+
+
                 Visualize(vo);
             }
             else
             {
                 Visualize(vo);
+
+                
+
+                if(foo == true)
+                {
+                    Shoot();
+                }
+
+
+                foo = false;
+                
             }
 
-           
+
+
+            // 1 
+            // ****
+
 
             cursor.transform.position = CalculatePosInTime(vo, 1);
 
@@ -117,6 +151,8 @@ public class PlayerShooting : MonoBehaviour
         }
     }
 
+   
+
     public void Shoot() {
 
         //vo = new Vector3(joystick.Horizontal * 30, 0, Mathf.Clamp(joystick.Vertical * 35, 6f, 60f));
@@ -125,7 +161,9 @@ public class PlayerShooting : MonoBehaviour
         {
             if (launchTimer <= 0) {
             Rigidbody obj = Instantiate(projectile, shootPoint.position, Quaternion.identity);
-            obj.velocity = new Vector3(vo.x,vo.y,vo.z+3);
+
+                obj.velocity = new Vector3(vo.x, vo.y, vo.z + 3);
+                
             launchTimer = 1f;
                 characterAnimator.Play("ThrowBall");
                 bombAnimator.Play("BombChange");

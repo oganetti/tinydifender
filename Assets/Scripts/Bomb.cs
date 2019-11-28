@@ -9,6 +9,8 @@ public class Bomb : MonoBehaviour
     public AudioSource audioS;
     public AudioClip audioC;
 
+    SphereCollider collider;
+
     float power = 20f;
     float radius = 10.0f;
     float upForce = 5.0f;
@@ -16,44 +18,36 @@ public class Bomb : MonoBehaviour
     private void Start()
     {
         transform = GetComponent<Transform>();
+        collider = GetComponent<SphereCollider>();
     }
 
 
     private void Update()
     {
-        Invoke("Detonate", 2);
+       // Invoke("Detonate", 2);
         //Destroy(this.gameObject, 2.51f);
 
     }
 
-    void Detonate()
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Ground" || collision.gameObject.tag == "Enemy") {
+            Detonate(collision.gameObject);
+            Destroy(this.gameObject);
+        }
+    } 
+
+    public void Detonate(GameObject gameObject)
     {
         Debug.Log("Detonate: Enter");
-        Collider[] colliders = Physics.OverlapSphere(transform.position, radius);
         Instantiate(explosionEffect, new Vector3(this.transform.position.x,this.transform.position.y + 1 ,this.transform.position.z), explosionEffect.transform.rotation);
-       
-       foreach (Collider hit in colliders)
-        {
-            if (hit.gameObject.tag == "Enemy")
-            {
-                audioS.PlayOneShot(audioC);
-                Debug.Log("Enemy is bombed");
-              //  hit.attachedRigidbody.AddExplosionForce(power, transform.position, radius, upForce, ForceMode.Impulse);
-
-                hit.gameObject.GetComponent<Enemy>().Die();
-
-                Rigidbody[] rigidbodies = hit.gameObject.GetComponentsInChildren<Rigidbody>();
-                for (int i=0; i < rigidbodies.Length; i++)
-                {
-                    audioS.PlayOneShot(audioC);
-                    rigidbodies[i].AddExplosionForce(power, transform.position, radius, upForce, ForceMode.Impulse);
-                }
-                
-
-            }
+        if (gameObject.tag == "Enemy") {
+            gameObject.GetComponent<Enemy>().Die();
+            //Destroy(this.gameObject);
         }
-        Destroy(this.gameObject);
     }
+
+
 
 
     public void Disappear()

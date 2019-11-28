@@ -40,13 +40,15 @@ public class GameManager : MonoBehaviour
     private GameObject openButton;
 
 
+
     private int enemyCount = 4;
 
     void Start()
     {
+        enemyCount = 4;
         Time.timeScale = 0;
 
-        if(SceneManager.GetActiveScene().buildIndex == 0)
+        if(SceneManager.GetActiveScene().buildIndex == 0) 
         {
             PlayerPrefs.SetInt("money", 2000);
             PlayerPrefs.SetInt("green", 0);
@@ -105,9 +107,11 @@ public class GameManager : MonoBehaviour
         canvasInGame.SetActive(false);
         canvasGameOver.SetActive(false);
         canvasLevelComplete.SetActive(true);
+        PlayerPrefs.SetInt("level", PlayerPrefs.GetInt("level") + 1);
         runAnimation.Play("Run");
         PlayerPrefs.SetInt("money", PlayerPrefs.GetInt("money") + 2000);
         Debug.Log(PlayerPrefs.GetInt("money"));
+
 
     }
 

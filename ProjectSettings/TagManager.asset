@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Castle
   - Enemy
+  - Ground
   layers:
   - Default
   - TransparentFX
