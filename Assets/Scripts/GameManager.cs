@@ -118,7 +118,7 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
-        Time.timeScale =  1;
+        Time.timeScale =  1.5f;
         canvasMenu.SetActive(false);
         canvasInGame.SetActive(true);
 
@@ -135,7 +135,7 @@ public class GameManager : MonoBehaviour
     {
 
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        Time.timeScale = 1;
+        Time.timeScale = 1.5f;
 
     }
 

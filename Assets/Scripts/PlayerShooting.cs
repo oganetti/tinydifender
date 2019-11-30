@@ -87,16 +87,12 @@ public class PlayerShooting : MonoBehaviour
                 Debug.Log(" horizontal x = " + joystick.Horizontal);
                 
                 // vo += new Vector3(joystick.Horizontal * 0.2f , 0, Mathf.Clamp(joystick.Vertical * 0.2f, 6f, 60f));
-                if ((vo.x >= -8 || joystick.Horizontal>0) && (vo.x < 7 || joystick.Horizontal < 0)) {
-                    vo += new Vector3(joystick.Horizontal * 20f*Time.deltaTime, 0, 0);
 
-                }
+                
+                
+                 vo += new Vector3(joystick.Horizontal * 15f * Time.deltaTime, 0, joystick.Vertical * 25f*Time.deltaTime);
 
-                if ((vo.z >= 11 || joystick.Vertical > 0) && (vo.z < 40 || joystick.Vertical < 0))
-                {
-                    vo += new Vector3(0, 0, joystick.Vertical * 40f*Time.deltaTime);
-
-                }
+                
 
 
                 foo = true;
@@ -106,18 +102,18 @@ public class PlayerShooting : MonoBehaviour
             }
             else
             {
-                Visualize(vo);
-
-                
-
-                if(foo == true)
+       
+               if(foo == true)
                 {
                     Shoot();
                 }
 
 
                 foo = false;
-                
+
+                vo = new Vector3(0, 0, 10);
+                Visualize(vo);
+
             }
 
 

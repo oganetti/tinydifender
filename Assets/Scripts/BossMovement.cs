@@ -6,11 +6,11 @@ public class BossMovement :  MovementBehaviour
 {
     [SerializeField]
     public Transform characterTransform;
-    [Range(10, 140)]
+    [Range(1, 140)]
     public float speed = 125f;
 
     float time = 0.0f;
-    float interpolationPeriod = 0.7f;
+    float interpolationPeriod = 3.0f;
 
     // Start is called before the first frame update
     void Start()
