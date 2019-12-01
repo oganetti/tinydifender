@@ -2703,12 +2703,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1285247271429802244, guid: 57ac1cfe5e76c4a6cb64b4e4b2385f5c,
+    - target: {fileID: 4978062459401515632, guid: 57ac1cfe5e76c4a6cb64b4e4b2385f5c,
         type: 3}
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4978062459401515632, guid: 57ac1cfe5e76c4a6cb64b4e4b2385f5c,
+    - target: {fileID: 1285247271429802244, guid: 57ac1cfe5e76c4a6cb64b4e4b2385f5c,
         type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -3211,7 +3211,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 2
+  m_Text: 3
 --- !u!222 &469816652
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4135,7 +4135,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 1
+  m_Text: 2
 --- !u!222 &619069759
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5047,7 +5047,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 1e-45, y: 1.61e-43, z: 0, w: 159649.62}
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -13381,7 +13381,7 @@ LineRenderer:
   - {x: 0, y: 0, z: 1}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.3
+    widthMultiplier: 0.5
     widthCurve:
       serializedVersion: 2
       m_Curve:

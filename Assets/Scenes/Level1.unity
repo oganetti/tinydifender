@@ -953,7 +953,7 @@ PrefabInstance:
     - target: {fileID: 3170907849203888775, guid: 2ccdea69d90384ac0b51bda46e175d86,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 70.7
+      value: 75.7
       objectReference: {fileID: 0}
     - target: {fileID: 3170907849203888775, guid: 2ccdea69d90384ac0b51bda46e175d86,
         type: 3}
@@ -1834,9 +1834,14 @@ PrefabInstance:
     - target: {fileID: 8135886327475159576, guid: 56fae09712773584fb63896d473a98ee,
         type: 3}
       propertyPath: m_Color.a
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8135886327784587630, guid: 56fae09712773584fb63896d473a98ee,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8135886326569738820, guid: 56fae09712773584fb63896d473a98ee,
         type: 3}
       propertyPath: m_Color.a
       value: 0
@@ -2569,12 +2574,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1285247271429802244, guid: 57ac1cfe5e76c4a6cb64b4e4b2385f5c,
+    - target: {fileID: 4978062459401515632, guid: 57ac1cfe5e76c4a6cb64b4e4b2385f5c,
         type: 3}
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4978062459401515632, guid: 57ac1cfe5e76c4a6cb64b4e4b2385f5c,
+    - target: {fileID: 1285247271429802244, guid: 57ac1cfe5e76c4a6cb64b4e4b2385f5c,
         type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -4893,7 +4898,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 4e-45}
+  m_BoundingSphereOverride: {x: 1e-45, y: 2.97608e-40, z: 0, w: 2.1047367e-31}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -13321,7 +13326,7 @@ LineRenderer:
   - {x: 0, y: 0, z: 1}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.3
+    widthMultiplier: 0.5
     widthCurve:
       serializedVersion: 2
       m_Curve:

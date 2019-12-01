@@ -40,6 +40,7 @@ public class PlayerShooting : MonoBehaviour
     public bool foo = false;
 
 
+
     // Line rendering and launching missile 
     // will work until player's cursor
     // is below positionAllowed
@@ -68,7 +69,11 @@ public class PlayerShooting : MonoBehaviour
     void Update()
     {
         launchTimer -= Time.deltaTime;
-        LaunchProjectile();
+
+
+                LaunchProjectile();
+           
+        
     }
 
     void LaunchProjectile()
@@ -76,26 +81,65 @@ public class PlayerShooting : MonoBehaviour
         Ray camRay = cam.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
+ 
+
+
         if (Physics.Raycast(camRay, out hit, 100f, layer))
         {
 
             cursor.SetActive(true);
-            //cursor.transform.position = hit.point + Vector3.up * 0.1f;
+            //cursor.transform.position = hit.point + Vector3.up * 0.1f;           
+
+        
 
             if(joystick.Horizontal != 0 && joystick.Vertical != 0)
             {
                 Debug.Log(" horizontal x = " + joystick.Horizontal);
-                
+
                 // vo += new Vector3(joystick.Horizontal * 0.2f , 0, Mathf.Clamp(joystick.Vertical * 0.2f, 6f, 60f));
 
-                
-                
-                 vo += new Vector3(joystick.Horizontal * 15f * Time.deltaTime, 0, joystick.Vertical * 25f*Time.deltaTime);
 
-                
+                //if(joystick.OnDrag)
+                if (joystick.Horizontal != 0.0f || joystick.Vertical != 0.0f)
 
 
-                foo = true;
+                    if (Input.touchCount > 0)
+                    {
+                        Touch touch = Input.GetTouch(0);
+
+                        if(touch.phase == TouchPhase.Began)
+                        {
+                            Debug.Log("Began:" + touch.position);
+                        }
+
+                        if (touch.phase == TouchPhase.Ended)
+                        {
+                            Debug.Log("End:" + touch.position);
+                        }
+
+                        if (touch.phase == TouchPhase.Moved)
+                        {
+                            if ((joystick.Horizontal > 0.05f && joystick.Horizontal > 0) || (joystick.Horizontal < -0.05 && joystick.Horizontal < 0)) {
+                                vo += new Vector3(joystick.Horizontal * 10f*Time.deltaTime, 0, 0);
+
+                            }
+
+                            if ((joystick.Vertical > 0.10 && joystick.Vertical > 0) || (joystick.Vertical < -0.10 && joystick.Vertical < 0))
+                            {
+                                vo += new Vector3(0, 0, joystick.Vertical * 25f*Time.deltaTime);
+
+
+                            }
+
+                        }
+                    }
+                    else
+                    {
+                        vo = new Vector3(0, 0, 17);
+                        Visualize(vo);
+                    }
+
+                    foo = true;
 
 
                 Visualize(vo);
@@ -111,7 +155,7 @@ public class PlayerShooting : MonoBehaviour
 
                 foo = false;
 
-                vo = new Vector3(0, 0, 10);
+                vo = new Vector3(0, 0, 17);
                 Visualize(vo);
 
             }
