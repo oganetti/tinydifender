@@ -938,7 +938,7 @@ PrefabInstance:
     - target: {fileID: 3170907849203888774, guid: 2ccdea69d90384ac0b51bda46e175d86,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3170907849203888775, guid: 2ccdea69d90384ac0b51bda46e175d86,
         type: 3}
@@ -3723,7 +3723,7 @@ PrefabInstance:
     - target: {fileID: 3170907849203888774, guid: 2ccdea69d90384ac0b51bda46e175d86,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3170907849203888775, guid: 2ccdea69d90384ac0b51bda46e175d86,
         type: 3}
@@ -7684,7 +7684,7 @@ PrefabInstance:
     - target: {fileID: 3170907849203888774, guid: 2ccdea69d90384ac0b51bda46e175d86,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3170907849203888775, guid: 2ccdea69d90384ac0b51bda46e175d86,
         type: 3}
@@ -8663,7 +8663,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1286749359}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -13.7, z: 42.9}
+  m_LocalPosition: {x: 0, y: -13.7, z: 33.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -13337,6 +13337,7 @@ MonoBehaviour:
   shootPoint: {fileID: 885286262}
   target: {fileID: 1286749360}
   joystick: {fileID: 1524423232}
+  joystickMovementSpeed: 2.54
 --- !u!4 &1960411141 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400002, guid: 27d33c8b64d080247abb936499d93faf,

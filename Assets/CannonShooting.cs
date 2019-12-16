@@ -11,7 +11,12 @@ public class CannonShooting : MonoBehaviour
     public Transform shootPoint;
     public Transform target;
 
+    private Vector3 targetInitialPosition;
+
     public Joystick joystick;
+
+    [Range(1,4)]
+    public float joystickMovementSpeed;
 
     private GameObject ball;
     private float power = 1.5f;
@@ -23,6 +28,8 @@ public class CannonShooting : MonoBehaviour
     void Start()
     {
         Time.timeScale = 1;
+
+        targetInitialPosition = target.position;
 
         InstantiateTrajectoryPoints();
 
@@ -43,7 +50,6 @@ public class CannonShooting : MonoBehaviour
 
     void Update()
     {
-        target.position += new Vector3(joystick.Horizontal * 2, 0, joystick.Vertical * 2);
 
         if (Input.touchCount > 0)
         {
@@ -52,29 +58,37 @@ public class CannonShooting : MonoBehaviour
             if (touch.phase == TouchPhase.Began)
             {
                 Debug.Log("Began:" + touch.position);
+                target.position = targetInitialPosition;
+
+                Vector3 vel = GetForceFrom(shootPoint.position, target.position);
+
+                setTrajectoryPoints(shootPoint.position, vel);
             }
 
             if (touch.phase == TouchPhase.Ended)
             {
                 Debug.Log("End:" + touch.position);
+                hideTrajectoryPoints();
+                
             }
 
             if (touch.phase == TouchPhase.Moved)
             {
+                target.position += new Vector3(joystick.Horizontal * joystickMovementSpeed * 0.5f, 0, joystick.Vertical * joystickMovementSpeed);
 
+                Vector3 vel = GetForceFrom(shootPoint.position, target.position);
+
+                //These 2 line rotate trajectory points towards to target
+
+                setTrajectoryPointsPositions(shootPoint.position, vel);
             }
 
         }
 
+        //else {
+            
 
-        else {
-            Vector3 vel = GetForceFrom(shootPoint.position, target.position);
-
-            //These 2 line rotate trajectory points towards to target
-           
-            setTrajectoryPointsPositions(shootPoint.position, vel);
-
-        }
+        //}
 
         Debug.Log("joystick horizontal: " + joystick.Horizontal + "\nJoystick vertical: " + joystick.Vertical);
 
@@ -98,6 +112,12 @@ public class CannonShooting : MonoBehaviour
     // Following method creates new ball
     //---------------------------------------
 
+
+    private void hideTrajectoryPoints() {
+        for (int i = 0; i < numOfTrajectoryPoints; i++) {
+            trajectoryPoints[i].GetComponent<MeshRenderer>().enabled = false;
+        }
+    }
 
     private void createBall()
     {
