@@ -63,6 +63,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\CannonShooting.cs" />
     <Compile Include="Assets\CastleDown.cs" />
     <Compile Include="Assets\Destructible.cs" />
     <Compile Include="Assets\Joystick Pack\Examples\JoystickPlayerExample.cs" />
