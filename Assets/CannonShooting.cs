@@ -69,6 +69,7 @@ public class CannonShooting : MonoBehaviour
             {
                 Debug.Log("End:" + touch.position);
                 hideTrajectoryPoints();
+                //deneme
                 
             }
 
